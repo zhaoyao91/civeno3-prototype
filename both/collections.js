@@ -6,8 +6,17 @@ Projects.attachSchema(new SimpleSchema({
     type: String
   },
 
-  // manager userId
-  manager: {
+  description: {
     type: String
+  },
+
+  // userId
+  owner: {
+    type: String
+  },
+
+  // userId
+  managers: {
+    type: [String]
   }
 }))

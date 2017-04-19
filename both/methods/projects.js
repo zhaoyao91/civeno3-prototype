@@ -1,23 +1,20 @@
 import { ValidatedMethod } from 'meteor/mdg:validated-method'
-import { Projects } from './collections'
+import { Projects } from '../collections'
 
-const projectsMethods = {
+export default {
   createProject: new ValidatedMethod({
     name: 'Projects.createProject',
     validate: null,
-    run({name}) {
+    run({name, description}) {
       if (!this.userId) {
         throw new Meteor.Error('Projects.createProject.not-logged-in')
       }
 
       return Projects.insert({
         name,
-        manager: this.userId,
+        description,
+        owner: this.userId,
       })
     }
   })
-}
-
-export {
-  projectsMethods as Projects
 }
