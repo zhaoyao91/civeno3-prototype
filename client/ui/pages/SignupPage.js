@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router-dom'
 
 import MainLayout from '../layouts/MainLayout'
 
-const SignupPage = () => (
+export default () => (
   <MainLayout>
     <Container style={{marginTop: '1em'}}>
       <h1>注册</h1>
@@ -14,8 +14,6 @@ const SignupPage = () => (
     </Container>
   </MainLayout>
 )
-
-export default SignupPage
 
 const SignupForm = compose(
   withState('email', 'setEmail', ''),

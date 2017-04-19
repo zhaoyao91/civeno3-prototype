@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router-dom'
 
 import MainLayout from '../layouts/MainLayout'
 
-const SigninPage = () => (
+export default () => (
   <MainLayout>
     <Container style={{marginTop: '1em'}}>
       <h1>登录</h1>
@@ -14,8 +14,6 @@ const SigninPage = () => (
     </Container>
   </MainLayout>
 )
-
-export default SigninPage
 
 const SigninForm = compose(
   withState('email', 'setEmail', ''),

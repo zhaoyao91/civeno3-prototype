@@ -6,7 +6,7 @@ import { Meteor } from 'meteor/meteor'
 import { prop } from 'lodash/fp'
 import { compose, withHandlers } from 'recompose'
 
-const Navbar = () => (
+export default () => (
   <Menu borderless>
     <Container>
       <Menu.Item as={Link} to="/">
@@ -18,8 +18,6 @@ const Navbar = () => (
     </Container>
   </Menu>
 )
-
-export default Navbar
 
 const UserItem = createContainer(() => ({
   user: Meteor.user()
