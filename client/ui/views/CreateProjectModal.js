@@ -1,11 +1,14 @@
 import React from 'react'
-import { Modal, Button } from 'semantic-ui-react'
+import { Modal, Button, Form } from 'semantic-ui-react'
 
 export default ({trigger, open, onOpen, onClose}) => (
-  <Modal open={open} trigger={trigger} onOpen={onOpen} onClose={onClose}>
+  <Modal size="small" open={open} trigger={trigger} onOpen={onOpen} onClose={onClose}>
     <Modal.Header content='创建项目'/>
     <Modal.Content>
-      <p>Create Project ... </p>
+      <Form>
+        <Form.Input label="项目名称"/>
+        <Form.TextArea autoHeight label="项目描述"/>
+      </Form>
     </Modal.Content>
     <Modal.Actions>
       <Button onClick={onClose}>返回</Button>
