@@ -1,9 +1,11 @@
 import React from 'react'
-import { Card, Icon } from 'semantic-ui-react'
+import { Card, Icon, Button } from 'semantic-ui-react'
 import { flatten } from 'lodash/fp'
+import { compose, withState, withHandlers } from 'recompose'
 
 import MainLayout from '../layouts/MainLayout'
 import SideNavLayout from '../layouts/SideNavLayout'
+import CreateProjectModal from '../views/CreateProjectModal'
 
 const fakeProjects = [
   {name: '打到帝国主义'},
@@ -19,7 +21,7 @@ export default () => (
     <SideNavLayout>
       <div style={{width: '100%', height: '100%', padding: '1em'}}>
         <ProjectListLayout>
-          <AddProjectButton/>
+          <CreateProjectButton/>
           {
             fakeProjects.map(project => <ProjectCard key={project.name} project={project}/>)
           }
@@ -29,13 +31,24 @@ export default () => (
   </MainLayout>
 )
 
-const AddProjectButton = () => (
-  <Card style={{width: '100%', height: '100%'}}>
+const CreateProjectUIButton = ({onClick}) => (
+  <Card style={{width: '100%', height: '100%'}} onClick={onClick}>
     <Card.Content style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-      <Icon name="plus" size="huge"/>
+      <Icon name="plus" size="huge" style={{color: 'initial'}}/>
     </Card.Content>
   </Card>
 )
+
+const CreateProjectButton = compose(
+  withState('modalVisible', 'setModalVisible', false),
+  withHandlers({
+    openModal: ({setModalVisible}) => () => setModalVisible(true),
+    closeModal: ({setModalVisible}) => () => setModalVisible(false)
+  })
+)(({modalVisible, openModal, closeModal}) => (
+  <CreateProjectModal trigger={<CreateProjectUIButton onClick={openModal}/>} open={modalVisible} onOpen={openModal}
+                      onClose={closeModal}/>
+))
 
 const ProjectCard = ({project}) => (
   <Card style={{width: '100%', height: '100%'}}>
