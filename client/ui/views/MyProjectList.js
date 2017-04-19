@@ -3,7 +3,7 @@ import { Modal, Button, Header, List, Segment } from 'semantic-ui-react'
 import { compose, withState, withHandlers } from 'recompose'
 
 const MyProjectList = ({projects = []}) => (
-  <Segment style={{width: '200px', height: '100%'}}>
+  <Segment style={{width: '200px'}}>
     <Header size="medium">我的项目</Header>
     <List>
       {

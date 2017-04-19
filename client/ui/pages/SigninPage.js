@@ -4,24 +4,18 @@ import { compose, withHandlers, withState } from 'recompose'
 import { Meteor } from 'meteor/meteor'
 import { Link, withRouter } from 'react-router-dom'
 
-import Navbar from '../views/Navbar'
-import FixedTopLayout from '../layouts/FixedTopLayout'
+import MainLayout from '../layouts/MainLayout'
 
 const SigninPage = () => (
-  <FixedTopLayout
-    top={<Navbar/>}
-    main={<Main/>}
-  />
+  <MainLayout>
+    <Container style={{marginTop: '1em'}}>
+      <h1>登录</h1>
+      <SigninForm/>
+    </Container>
+  </MainLayout>
 )
 
 export default SigninPage
-
-const Main = () => (
-  <Container style={{marginTop: '1em'}}>
-    <h1>登录</h1>
-    <SigninForm/>
-  </Container>
-)
 
 const SigninForm = compose(
   withState('email', 'setEmail', ''),
