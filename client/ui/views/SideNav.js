@@ -9,6 +9,6 @@ export default compose(
 )(({path}) => (
   <Menu fluid vertical tabular style={{height: '100%'}}>
     <Menu.Item as={Link} to="/workspace" active={path === '/workspace'}>工作台</Menu.Item>
-    <Menu.Item as={Link} to="/projects" active={path === '/projects'}>项目</Menu.Item>
+    <Menu.Item as={Link} to="/my-projects" active={path === '/my-projects'}>项目</Menu.Item>
   </Menu>
 ))

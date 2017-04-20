@@ -4,10 +4,11 @@ import { flatten } from 'lodash/fp'
 import { compose } from 'recompose'
 import { Projects } from '/both/collections'
 import { Meteor } from 'meteor/meteor'
+import { Link } from 'react-router-dom'
 
 import withMeteorData from '../hocs/with_meteor_data'
 
-const MyProjects = compose(
+export default compose(
   withMeteorData(({props}) => {
     const userId = Meteor.userId()
     return {
@@ -24,10 +25,8 @@ const MyProjects = compose(
   </ProjectListLayout>
 ))
 
-export default MyProjects
-
 const ProjectCard = ({project}) => (
-  <Card style={{width: '200px'}}>
+  <Card as={Link} to={`/project/${project._id}`} style={{width: '200px'}}>
     <Card.Content>
       <Card.Header style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
         {project.name}
