@@ -1,8 +1,8 @@
 import { Mongo } from 'meteor/mongo'
 import { compose, has, mapValues, isObjectLike, isArray, map, defaults, cond, T, identity } from 'lodash/fp'
 
-export const Projects = new Mongo.Collection('Projects')
-Projects.attachSchema(new SimpleSchema(defaultOptional({
+export const Flows = new Mongo.Collection('Flows')
+Flows.attachSchema(new SimpleSchema(defaultOptional({
   name: {
     type: String,
   },
@@ -15,11 +15,6 @@ Projects.attachSchema(new SimpleSchema(defaultOptional({
   owner: {
     type: String,
   },
-
-  // userId
-  managers: {
-    type: [String],
-  }
 })))
 
 // make all fields of target optional by default

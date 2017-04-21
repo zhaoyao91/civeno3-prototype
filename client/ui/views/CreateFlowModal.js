@@ -5,7 +5,7 @@ import { assoc } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import Alert from 'react-s-alert'
 
-import { Projects as ProjectsMethods } from '/both/methods'
+import { Flows as FlowsMethods } from '/both/methods'
 
 export default compose(
   setPropTypes({
@@ -15,54 +15,54 @@ export default compose(
     onClose: PropTypes.func,
   }),
   withProps({
-    emptyProject: {name: '', description: ''}
+    emptyFlow: {name: '', description: ''}
   }),
-  withState('project', 'setProject', ({emptyProject}) => emptyProject),
+  withState('flow', 'setFlow', ({emptyFlow}) => emptyFlow),
   withHandlers({
-    onNameChange: ({setProject}) => (e) => setProject(assoc('name', e.target.value)),
-    onDescriptionChange: ({setProject}) => (e) => setProject(assoc('description', e.target.value))
+    onNameChange: ({setFlow}) => (e) => setFlow(assoc('name', e.target.value)),
+    onDescriptionChange: ({setFlow}) => (e) => setFlow(assoc('description', e.target.value))
   }),
   lifecycle({
     componentWillReceiveProps(nextProps) {
       if (this.props.open !== nextProps.open) {
-        this.props.setProject(this.props.emptyProject)
+        this.props.setFlow(this.props.emptyFlow)
       }
     }
   }),
   withState('submitting', 'setSubmitting', false),
   withHandlers({
-    onCreateProject: ({project, setSubmitting, onClose}) => () => {
+    onCreateFlow: ({flow, setSubmitting, onClose}) => () => {
       setSubmitting(true)
-      ProjectsMethods.createProject.call(project, (err) => {
+      FlowsMethods.createFlow.call(flow, (err) => {
         setSubmitting(false)
         if (err) {
           console.error(err)
-          Alert.error('项目创建失败')
+          Alert.error('流程创建失败')
         } else {
-          Alert.success('项目创建成功')
+          Alert.success('流程创建成功')
           onClose()
         }
       })
     }
   }),
   withHandlers({
-    onSubmit: ({onCreateProject}) => e => {
+    onSubmit: ({onCreateFlow}) => e => {
       e.preventDefault()
-      onCreateProject()
+      onCreateFlow()
     }
   })
-)(({trigger, open, onOpen, onClose, project, onNameChange, onDescriptionChange, onSubmit, onCreateProject, submitting}) => (
+)(({trigger, open, onOpen, onClose, flow, onNameChange, onDescriptionChange, onSubmit, onCreateFlow, submitting}) => (
   <Modal size="small" open={open} trigger={trigger} onOpen={onOpen} onClose={onClose}>
-    <Modal.Header content='创建项目'/>
+    <Modal.Header content='创建流程'/>
     <Modal.Content>
       <Form loading={submitting} onSubmit={onSubmit}>
-        <Form.Input label="项目名称" value={project.name} onChange={onNameChange}/>
-        <Form.TextArea autoHeight label="项目描述" value={project.description} onChange={onDescriptionChange}/>
+        <Form.Input label="流程名称" value={flow.name} onChange={onNameChange}/>
+        <Form.TextArea autoHeight label="流程描述" value={flow.description} onChange={onDescriptionChange}/>
       </Form>
     </Modal.Content>
     <Modal.Actions>
       <Button onClick={onClose}>返回</Button>
-      <Button primary onClick={onCreateProject}>创建</Button>
+      <Button primary onClick={onCreateFlow}>创建</Button>
     </Modal.Actions>
   </Modal>
 ))

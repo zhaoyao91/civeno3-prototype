@@ -1,16 +1,16 @@
 import { ValidatedMethod } from 'meteor/mdg:validated-method'
-import { Projects } from '../collections'
+import { Flows } from '../collections'
 
 export default {
-  createProject: new ValidatedMethod({
-    name: 'Projects.createProject',
+  createFlow: new ValidatedMethod({
+    name: 'Flows.createFlow',
     validate: null,
     run({name, description}) {
       if (!this.userId) {
-        throw new Meteor.Error('Projects.createProject.not-logged-in')
+        throw new Meteor.Error('Flows.createFlow.not-logged-in')
       }
 
-      return Projects.insert({
+      return Flows.insert({
         name,
         description,
         owner: this.userId,
